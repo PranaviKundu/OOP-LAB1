@@ -42,13 +42,15 @@ public:
 
     // Stream insertion and extraction operators
     friend ostream& operator << (ostream& out, const Complex& c) {
+        // & used to creat a referance of a variable
+        // const specifies that the object is qualfied to not modifiable. ensures that the value of the object can  not be changed though this referance.
         out << c.real << " + " << c.imaginary << "i";
         return out;
     }
 
     friend istream& operator >> (istream& in, Complex& c) {
         // friend function is a function that is not a member of a class but has access to the private and protected members of the class if it is declared as a friend within that class.
-        
+
         cout << "Enter real part: ";
         in >> c.real;
         cout << "Enter imaginary part: ";
