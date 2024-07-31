@@ -86,8 +86,9 @@ public:
         os << real << " + " << imag << "i";
         return os;
     }
-
-   
+    // 'os stands for an output stream, which is a type of stream in C++ used for output operations. The std::ostream class is a part of the C++ Standard Library 
+    //and is used for outputting data to various destinations, such as the console, files, or other output devices.
+    //return os;: This returns the output stream os by reference, which allows for chaining of output operations.
 
 
     // Overload >> operator to read Complex numbers
