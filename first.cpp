@@ -111,6 +111,10 @@ public:
     Complex operator-(const Complex& lhs, const Complex& rhs) {
         return Complex(lhs.getReal() - rhs.getReal(), lhs.getImag() - rhs.getImag());
     }
+//In the context of the Complex class and the provided operator- function, getReal and getImag are member functions that are
+//used to access the internal state of a Complex object. Their significance is primarily related to encapsulation and ease of access to the properties of the Complex class.
+//lhs.getReal() - rhs.getReal(): This expression computes the difference between the real parts of the two Complex objects.
+//It calls the getReal() member function of both lhs (left-hand side) and rhs (right-hand side) to get their real parts and subtracts them.
 
     // Overload >> operator to read Complex numbers
     std::istream& operator>>(std::istream& is, Complex& complex) {
