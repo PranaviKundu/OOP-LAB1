@@ -4,25 +4,23 @@
 // 2. Overload operator+ to add two complex numbers.
 // 3. Overload operator* to multiply two complex numbers.
 // 4. Overload operators << and >> to print and read Complex Numbers.
-#include <iostream>
+#include <iostream>// this is the header file used to get standard input output from the hardware.
 
 using namespace std;
+//we have used namsapace to use the std function everwhere in the code.
 
 class Complex {
-private:
-    double real;
-    double imaginary;
-// double real: Stores the real part of the complex number.
-// double imaginary: Stores the imaginary part of the complex number.
+                private://we have declared it as private s that it can not be altered anywere in the code.
+                double real;// double real: Stores the real part of the complex number.
+                double imaginary;// double imaginary: Stores the imaginary part of the complex number.
+                    public:
+                        // initialided  the Constructor with the name complex
+                        Complex() : real(0.0), imaginary(0.0) {}
+                        // Default constructor initializes real and imaginary to '0.0'
+                        Complex(double r, double i) : real(r), imaginary(i) {}
+                        // Parameterized constructor initializes real to r and imaginary to i.
 
-public:
-    // Constructors
-    Complex() : real(0.0), imaginary(0.0) {}
-    // Default constructor initializes real and imaginary to '0.0'
-    Complex(double r, double i) : real(r), imaginary(i) {}
-    // Parameterized constructor initializes real to r and imaginary to i.
-
-    // Getter methods
+    // Getter methods:to get the values from the complex class
     double getReal() const { return real; }
     double getImag() const { return imag; }
      // // getReal() and getImag(): Public methods to access the private members real and imag, respectively. These methods allow read-only access to the internal state of a Complex object.
