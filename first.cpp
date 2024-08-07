@@ -4,28 +4,33 @@
 // 2. Overload operator+ to add two complex numbers.
 // 3. Overload operator* to multiply two complex numbers.
 // 4. Overload operators << and >> to print and read Complex Numbers.
+// 5. Overload operator/ to divide two complex numbers.
+// 6. Using atan operator to find the argument of two complex numbers.
 #include <iostream>// this is the header file used to get standard input output from the hardware.
+#include <cmath>
 
 using namespace std;
 //we have used namsapace to use the std function everwhere in the code.
 
 class Complex {
-                private://we have declared it as private s that it can not be altered anywere in the code.
-                double real;// double real: Stores the real part of the complex number.
-                double imaginary;// double imaginary: Stores the imaginary part of the complex number.
-                    public:
-                        // initialided  the Constructor with the name complex
-                        Complex() : real(0.0), imaginary(0.0) {}
-                        // Default constructor initializes real and imaginary to '0.0'
-                        Complex(double r, double i) : real(r), imaginary(i) {}
-                        // Parameterized constructor initializes real to r and imaginary to i.
+private://we have declared it as private s that it can not be altered anywere in the code.
+    double real;// double real: Stores the real part of the complex number.
+    double imaginary;// double imaginary: Stores the imaginary part of the complex number.
 
-    // Getter methods:to get the values from the complex class
+
+public:
+    // initialided  the Constructor with the name complex
+    Complex() : real(0.0), imaginary(0.0) {}
+    // Default constructor initializes real and imaginary to '0.0'
+    Complex(double r, double i) : real(r), imaginary(i) {}
+    // Parameterized constructor initializes real to r and imaginary to i.
+
+    // Getter methods- Getters are often used to access values from an object that are not directly accessible, such as nested properties.
     double getReal() const { return real; }
-    double getImag() const { return imag; }
+    double getImag() const { return imaginary; }
      // // getReal() and getImag(): Public methods to access the private members real and imag, respectively. These methods allow read-only access to the internal state of a Complex object.
 
-    // Operator overloading
+    // Operator overloading-Polymorphism (or operator overloading) is a manner in which OO systems allow the same operator name or symbol to be used for multiple operations.
     Complex operator + (const Complex& other)  const {
         return Complex(real + other.real, imaginary + other.imaginary);
     }
@@ -39,14 +44,14 @@ class Complex {
 
       // Overload - operator to subtract two complex numbers
     Complex operator-(const Complex& other) const {
-        return Complex(real - other.real, imag - other.imag);
+        return Complex(real - other.real, imaginary - other.imaginary);
     }
 
      Complex operator/(const Complex& other) const {
         // (a + bi) / (c + di) = ((a + bi) * (c - di)) / (c^2 + d^2)
-        double denominator = other.real * other.real + other.imag * other.imag;
-        double result_real = (real * other.real + imag * other.imag) / denominator;
-        double result_imag = (imag * other.real - real * other.imag) / denominator;
+        double denominator = other.real * other.real + other.imaginary * other.imaginary;
+        double result_real = (real * other.real + imaginary * other.imaginary) / denominator;
+        double result_imag = (imaginary * other.real - real * other.imaginary) / denominator;
         return Complex(result_real, result_imag);
     }
     
@@ -59,7 +64,7 @@ class Complex {
     }
       // Member function to find argument (angle) of the complex number
     double argument() const {
-        return std::atan2(imag, real);
+        return std::atan2(imaginary, real);
     }
     // // // // // Here we have commented the friends function to write a coade without it
     // // (Stream insertion and extraction operators)
@@ -81,20 +86,16 @@ class Complex {
     //     return in;
     // }
      std::ostream& print(std::ostream& os) const {
-        os << real << " + " << imag << "i";
+        os << real << " + " << imaginary << "i";
         return os;
     }
-    // 'os stands for an output stream, which is a type of stream in C++ used for output operations. The std::ostream class is a part of the C++ Standard Library 
-    //and is used for outputting data to various destinations, such as the console, files, or other output devices.
-    //return os;: This returns the output stream os by reference, which allows for chaining of output operations.
-
 
     // Overload >> operator to read Complex numbers
     std::istream& read(std::istream& is) {
         std::cout << "Enter real part: ";
         is >> real;
         std::cout << "Enter imaginary part: ";
-        is >> imag;
+        is >> imaginary;
         return is;
     }
     // // // read(): Member function that reads a complex number from a given input stream (is). 
@@ -109,10 +110,6 @@ class Complex {
     Complex operator-(const Complex& lhs, const Complex& rhs) {
         return Complex(lhs.getReal() - rhs.getReal(), lhs.getImag() - rhs.getImag());
     }
-//In the context of the Complex class and the provided operator- function, getReal and getImag are member functions that are
-//used to access the internal state of a Complex object. Their significance is primarily related to encapsulation and ease of access to the properties of the Complex class.
-//lhs.getReal() - rhs.getReal(): This expression computes the difference between the real parts of the two Complex objects.
-//It calls the getReal() member function of both lhs (left-hand side) and rhs (right-hand side) to get their real parts and subtracts them.
 
     // Overload >> operator to read Complex numbers
     std::istream& operator>>(std::istream& is, Complex& complex) {
