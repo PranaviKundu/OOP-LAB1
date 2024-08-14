@@ -14,19 +14,20 @@ class Student; // Forward declaration of Student class for friend class usage
 
 class StudentDatabase {
 private:
-    Student** students; // Pointer to an array of Student pointers
+    Student** students; // Pointer to an array of pointers to Student objects
     int numStudents;    // Number of students in the database
     static int totalStudents; // Static member to keep track of total students across all databases
-
+                            // Static member belongs to the class and not t anyone instance of the class, it is initialised only once, member can be a variable or method 
 public:
     // Default constructor
-    StudentDatabase() : students(nullptr), numStudents(0) {
-        cout << "StudentDatabase created." << endl;
+    StudentDatabase() : students(nullptr), numStudents(0) { //default constructor initializes students to nullptr and numStudent to 0
+        cout << "StudentDatabase created." << endl;         //nullptr is a way to represent a pointer that doesn't point to any object or memory location. we can also use 0 or NULL for the same purpose. It is used in a context where a pointer is expected 
     }
 
     // Parameterized constructor
-    StudentDatabase(int num) : numStudents(num) {
-        students = new Student*[numStudents];
+    StudentDatabase(int num) : numStudents(num) {  // studentDatabase is a constructor for the studentdatabase class that takes an integer num as an argument, represents number of student slot the database will have. The initializer list : numStudents(num) assigns the value of num (the parameter) to the member variable numStudents.
+        students = new Student*[numStudents];  //Here, the constructor allocates memory dynamically for an array of pointers to Student objects. creates an array of Student* pointers with numStudents slots. Each slot in this array is meant to hold a pointer to a Student object.students is a pointer to this array of Student* pointers. Initially, all elements in this array are uninitialized and may contain garbage values.
+        new Student*[numStudents];
         for (int i = 0; i < numStudents; ++i) {
             students[i] = nullptr; // Initialize pointers to nullptr
         }
