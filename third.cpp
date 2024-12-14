@@ -9,10 +9,12 @@ protected:
     float price;
 public:
     void getData() {
-        cout << "Enter title: "; getline(cin, title);
-        cout << "Enter price: "; cin >> price;
+        cout << "Enter title: ";
+        cin.ignore(); // Clear the input buffer before getline
+        getline(cin, title);
+        cout << "Enter price: ";
+        cin >> price;
         if (price < 0) throw invalid_argument("Invalid price");
-        cin.ignore();
     }
     void displayData() const {
         cout << "Title: " << title << "\nPrice: $" << price << endl;
@@ -25,7 +27,8 @@ class Book : public Publication {
 public:
     void getData() {
         Publication::getData();
-        cout << "Enter page count: "; cin >> pageCount;
+        cout << "Enter page count: ";
+        cin >> pageCount;
         if (pageCount < 0) throw invalid_argument("Invalid page count");
     }
     void displayData() const {
@@ -40,7 +43,8 @@ class Tape : public Publication {
 public:
     void getData() {
         Publication::getData();
-        cout << "Enter play time (minutes): "; cin >> playTime;
+        cout << "Enter play time (minutes): ";
+        cin >> playTime;
         if (playTime < 0) throw invalid_argument("Invalid play time");
     }
     void displayData() const {
