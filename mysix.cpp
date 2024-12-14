@@ -6,6 +6,8 @@ such as item records using vector container.
 #include <iostream>
 #include <algorithm>  // For STL algorithms like sort, find, for_each
 #include <vector>     // For STL vector container
+#include <limits>     // For numeric_limits
+
 using namespace std;
 
 // Class to represent an Item
@@ -39,6 +41,7 @@ bool compare(const Item& i1, const Item& i2);
 
 int main() {
     int ch;
+
     do {
         cout << "\n* * * * * Menu * * * * *";
         cout << "\n1. Insert";
@@ -49,6 +52,14 @@ int main() {
         cout << "\n6. Exit";
         cout << "\nEnter your choice: ";
         cin >> ch;
+
+        // Validate input for `ch`
+        if (cin.fail()) {
+            cin.clear();  // Clear the error state
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Discard invalid input
+            cout << "\nInvalid input! Please enter a valid choice (1-6).";
+            continue;  // Restart the loop
+        }
 
         switch (ch) {
         case 1:
@@ -74,11 +85,11 @@ int main() {
             break;
 
         case 6:
-            exit(0);
+           exit(0);
             break;
 
         default:
-            cout << "\nInvalid choice! Please try again.";
+            cout << "\nInvalid choice! Please enter a valid choice (1-6).";
         }
 
     } while (ch != 6);
@@ -102,6 +113,10 @@ void insert() {
 
 // Function to display all items in the vector
 void display() {
+    if (o1.empty()) {
+        cout << "\nNo items to display.";
+        return;
+    }
     for_each(o1.begin(), o1.end(), print);  // Use for_each to display all items
 }
 
@@ -116,24 +131,37 @@ void print(Item& i1) {
 
 // Function to search for an item based on its code
 void search() {
+    if (o1.empty()) {
+        cout << "\nNo items to search.";
+        return;
+    }
+
     vector<Item>::iterator p;
     Item i1;
     cout << "\nEnter Item Code to search: ";
     cin >> i1.code;
+
     p = find(o1.begin(), o1.end(), i1);  // Use find algorithm to search for the item
     if (p == o1.end()) {
         cout << "\nNot found!!!";
     } else {
-        cout << "\nFound!!!";
+        cout << "\nFound!!! Details:";
+        print(*p);
     }
 }
 
 // Function to delete an item based on its code
 void dlt() {
+    if (o1.empty()) {
+        cout << "\nNo items to delete.";
+        return;
+    }
+
     vector<Item>::iterator p;
     Item i1;
     cout << "\nEnter Item Code to delete: ";
     cin >> i1.code;
+
     p = find(o1.begin(), o1.end(), i1);  // Use find algorithm to search for the item to delete
     if (p == o1.end()) {
         cout << "\nNot found!!!";
@@ -147,3 +175,4 @@ void dlt() {
 bool compare(const Item& i1, const Item& i2) {
     return i1.cost < i2.cost;
 }
+
