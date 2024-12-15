@@ -1,16 +1,8 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <algorithm> // For transforming input to lowercase
 
 using namespace std;
-
-// Helper function to convert a string to lowercase
-string toLowerCase(const string& str) {
-    string result = str;
-    transform(result.begin(), result.end(), result.begin(), ::tolower);
-    return result;
-}
 
 int main() {
     // Map to store population data with state/UT names as keys and population as values
@@ -63,28 +55,16 @@ int main() {
     do {
         string state;
         cout << "\nEnter the state/UT name to find its population: ";
-        getline(cin, state);  // Use getline to allow multi-word input
+        cin >> state;
 
-        // Convert the input to lowercase to handle case-insensitive comparison
-        string lowerState = toLowerCase(state);
-
-        // Search for the lowercase version of the state name in the map
-        bool found = false;
-        for (const auto& entry : populationMap) {
-            if (toLowerCase(entry.first) == lowerState) {
-                cout << entry.first << "'s population is " << entry.second << " million" << endl;
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
+        if (populationMap.find(state) != populationMap.end()) {
+            cout << state << "'s population is " << populationMap[state] << " million" << endl;
+        } else {
             cout << "State/UT not found in the population map." << endl;
         }
 
         cout << "Do you want to search for another state? (y/n): ";
         cin >> cont;
-        cin.ignore();  // To clear the buffer before the next getline call
     } while (cont == 'y' || cont == 'Y');
 
     return 0;
